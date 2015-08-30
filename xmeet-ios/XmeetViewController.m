@@ -202,6 +202,12 @@
     _mMessageText.text = @"";
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (self.mMessageText == textField)
+        return NO;
+    return YES;
+}
+
 #pragma mark alertview deltegate
 - (void)alertView : (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -252,6 +258,12 @@
     
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
+
+
+#pragma websocket delegate
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
     NSLog(@"Websocket connected.");
 
