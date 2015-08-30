@@ -30,7 +30,7 @@
     result.uid = uid;
     
     for (XmeetUserInfo * user in _members) {
-        if (user.uid == uid) {
+        if ([user.uid isEqualToString:uid]) {
             result.nickname = user.nickname;
             result.isSelf = user.isSelf;
             break;
@@ -57,7 +57,7 @@
 
 - (void)renameMember:(NSString *)name uid:(NSString *)uid {
     for (XmeetUserInfo * user in _members) {
-        if (user.uid == uid) {
+        if ([user.uid isEqualToString:uid]) {
             user.nickname = user.nickname;
             break;
         }

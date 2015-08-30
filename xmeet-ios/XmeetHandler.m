@@ -13,17 +13,19 @@
 #import "JSON.h"
 
 @interface XmeetHandler ()
-{
-    NSString * mId;
-    XmeetMembers * mMembers;
-}
+
+@property (nonatomic, retain)XmeetMembers * mMembers;
+@property (nonatomic, copy) NSString * mId;
+
 @end
 
 @implementation XmeetHandler
+@synthesize mMembers = _mMembers, mId = _mId;
+
 - (id)init {
     self = [super init];
     if (self) {
-        mMembers = [[XmeetMembers alloc]init];
+        _mMembers = [[XmeetMembers alloc]init];
     }
     return self;
 }
@@ -63,7 +65,7 @@
 - (void) parseSelf:(NSDictionary *)object {
     @try {
         
-        mId = [object valueForKey:@"payload"];
+        _mId = [object valueForKey:@"payload"];
         
     } @catch (NSException *exception) {
     }
@@ -81,12 +83,12 @@
             user.uid 			= [info valueForKey:@"pid"];
             user.nickname 		= [info valueForKey:@"nickname"];
             
-            if ([mId isEqualToString:user.uid]) {
+            if ([_mId isEqualToString:user.uid]) {
                 [[NSUserDefaults standardUserDefaults]setObject:user.nickname forKey:@"user_nickname"];
                 user.isSelf = YES;
             }
             
-            [mMembers addMember:user];
+            [_mMembers addMember:user];
         }
         
     } @catch (NSException *exception) {
@@ -102,7 +104,7 @@
         user.uid 			= [object valueForKey:@"from"];
         user.nickname 		= [object valueForKey:@"payload"];
         
-        [mMembers addMember:user];
+        [_mMembers addMember:user];
         
         XmeetMessage * message = [[XmeetMessage alloc]init];
         message.message = [NSString stringWithFormat:@"%@ 加入了聊天室", user.nickname];
@@ -119,7 +121,7 @@
 - (void) parseLeave:(NSDictionary *)object {
     @try {
         NSString *uid = [object valueForKey:@"from"];
-        NSString *nickname = [mMembers removeMember:uid];
+        NSString *nickname = [_mMembers removeMember:uid];
         XmeetMessage * message = [[XmeetMessage alloc]init];
         message.message = [NSString stringWithFormat:@"%@ 离开了聊天室", nickname];
         message.type = 2;
@@ -138,7 +140,7 @@
         NSString * payload = [object valueForKey:@"payload"];
         NSString * send_time = [object valueForKey:@"send_time"];
         
-        XmeetUserInfo * user = [mMembers queryMember:uid];
+        XmeetUserInfo * user = [_mMembers queryMember:uid];
         NSString * nickname = user.nickname == nil ? @"" : user.nickname;
         
         XmeetMessage * message = [[XmeetMessage alloc]init];
@@ -161,11 +163,11 @@
         NSString * uid = [object valueForKey:@"from"];
         NSString * newname = [object valueForKey:@"payload"];
         
-        XmeetUserInfo * user = [mMembers queryMember:uid];
+        XmeetUserInfo * user = [_mMembers queryMember:uid];
         NSString * nickname = user.nickname == nil ? @"" : user.nickname;
         
         NSString * old = nickname;
-        [mMembers renameMember:newname uid:uid];
+        [_mMembers renameMember:newname uid:uid];
         
         XmeetMessage *message = [[XmeetMessage alloc]init];
         message.message = [NSString stringWithFormat:@"%@ 使用了新名字 %@", old, newname];
@@ -193,13 +195,13 @@
             
             XmeetMessage * message = [[XmeetMessage alloc]init];
             
-            XmeetUserInfo * user 	= [mMembers queryMember:[info valueForKey:@"from"]];
+            XmeetUserInfo * user 	= [_mMembers queryMember:[info valueForKey:@"from"]];
             NSString * nickname = user.nickname == nil ? @"" : user.nickname;
             message.nickName	= nickname;
             message.message		= [info valueForKey:@"payload" ];
             message.time	= [info valueForKey:@"send_time"];
 
-            if ([mId isEqualToString:user.uid])
+            if ([_mId isEqualToString:user.uid])
                 user.isSelf = true;
             
             [list addObject:message];
