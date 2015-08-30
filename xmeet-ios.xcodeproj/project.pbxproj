@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D124766C1B7DEE0800DA41F4 /* XmeetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124766B1B7DEE0800DA41F4 /* XmeetViewController.m */; };
+		D124766F1B7E1BD300DA41F4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124766E1B7E1BD300DA41F4 /* RootViewController.m */; };
+		D12476731B7E1E4B00DA41F4 /* xmeet_title_user.png in Resources */ = {isa = PBXBuildFile; fileRef = D12476721B7E1E4B00DA41F4 /* xmeet_title_user.png */; };
+		D12476761B7E1E8900DA41F4 /* xmeet_title_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D12476741B7E1E8900DA41F4 /* xmeet_title_user@2x.png */; };
+		D12476771B7E1E8900DA41F4 /* xmeet_title_user@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D12476751B7E1E8900DA41F4 /* xmeet_title_user@3x.png */; };
+		D12476791B7E2BCC00DA41F4 /* navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D12476781B7E2BCC00DA41F4 /* navigationbar.png */; };
+		D1334B4B1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = D1334B4A1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png */; };
+		D1334B4E1B92F9EA00CA290B /* XmeetMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1334B4D1B92F9EA00CA290B /* XmeetMessageCell.m */; };
+		D1334B5A1B92FE7600CA290B /* XmeetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D1334B591B92FE7600CA290B /* XmeetMessage.m */; };
+		D1632DCC1B93064200ED5E77 /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DCB1B93064200ED5E77 /* ic_launcher.png */; };
+		D1632DCF1B931BDF00ED5E77 /* XmeetTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D1632DCE1B931BDF00ED5E77 /* XmeetTools.m */; };
+		D1632DD41B93263900ED5E77 /* xmeet_message_mine.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DD01B93263900ED5E77 /* xmeet_message_mine.png */; };
+		D1632DD51B93263900ED5E77 /* xmeet_message_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DD11B93263900ED5E77 /* xmeet_message_mine@2x.png */; };
+		D1632DD61B93263900ED5E77 /* xmeet_message_other.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DD21B93263900ED5E77 /* xmeet_message_other.png */; };
+		D1632DD71B93263900ED5E77 /* xmeet_message_other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DD31B93263900ED5E77 /* xmeet_message_other@2x.png */; };
 		E33B64F31B78D1790000AC70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E33B64F21B78D1790000AC70 /* main.m */; };
 		E33B64F61B78D1790000AC70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E33B64F51B78D1790000AC70 /* AppDelegate.m */; };
 		E33B64F81B78D1790000AC70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E33B64F71B78D1790000AC70 /* Images.xcassets */; };
@@ -25,6 +40,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D124766A1B7DEE0800DA41F4 /* XmeetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetViewController.h; sourceTree = "<group>"; };
+		D124766B1B7DEE0800DA41F4 /* XmeetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetViewController.m; sourceTree = "<group>"; };
+		D124766D1B7E1BD300DA41F4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		D124766E1B7E1BD300DA41F4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		D12476721B7E1E4B00DA41F4 /* xmeet_title_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmeet_title_user.png; sourceTree = "<group>"; };
+		D12476741B7E1E8900DA41F4 /* xmeet_title_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmeet_title_user@2x.png"; sourceTree = "<group>"; };
+		D12476751B7E1E8900DA41F4 /* xmeet_title_user@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmeet_title_user@3x.png"; sourceTree = "<group>"; };
+		D12476781B7E2BCC00DA41F4 /* navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar.png; sourceTree = "<group>"; };
+		D1334B4A1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmeet_toolbar_bottom_bar.png; sourceTree = "<group>"; };
+		D1334B4C1B92F9EA00CA290B /* XmeetMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetMessageCell.h; sourceTree = "<group>"; };
+		D1334B4D1B92F9EA00CA290B /* XmeetMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetMessageCell.m; sourceTree = "<group>"; };
+		D1334B571B92FC6400CA290B /* XmeetUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XmeetUtils.h; sourceTree = "<group>"; };
+		D1334B581B92FE7600CA290B /* XmeetMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetMessage.h; sourceTree = "<group>"; };
+		D1334B591B92FE7600CA290B /* XmeetMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetMessage.m; sourceTree = "<group>"; };
+		D1632DCB1B93064200ED5E77 /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
+		D1632DCD1B931BDF00ED5E77 /* XmeetTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetTools.h; sourceTree = "<group>"; };
+		D1632DCE1B931BDF00ED5E77 /* XmeetTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetTools.m; sourceTree = "<group>"; };
+		D1632DD01B93263900ED5E77 /* xmeet_message_mine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmeet_message_mine.png; sourceTree = "<group>"; };
+		D1632DD11B93263900ED5E77 /* xmeet_message_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmeet_message_mine@2x.png"; sourceTree = "<group>"; };
+		D1632DD21B93263900ED5E77 /* xmeet_message_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmeet_message_other.png; sourceTree = "<group>"; };
+		D1632DD31B93263900ED5E77 /* xmeet_message_other@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmeet_message_other@2x.png"; sourceTree = "<group>"; };
 		E33B64ED1B78D1790000AC70 /* xmeet-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xmeet-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E33B64F11B78D1790000AC70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E33B64F21B78D1790000AC70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -78,6 +114,27 @@
 			children = (
 				E33B64F41B78D1790000AC70 /* AppDelegate.h */,
 				E33B64F51B78D1790000AC70 /* AppDelegate.m */,
+				D124766D1B7E1BD300DA41F4 /* RootViewController.h */,
+				D124766E1B7E1BD300DA41F4 /* RootViewController.m */,
+				D1334B571B92FC6400CA290B /* XmeetUtils.h */,
+				D1632DCD1B931BDF00ED5E77 /* XmeetTools.h */,
+				D1632DCE1B931BDF00ED5E77 /* XmeetTools.m */,
+				D124766A1B7DEE0800DA41F4 /* XmeetViewController.h */,
+				D124766B1B7DEE0800DA41F4 /* XmeetViewController.m */,
+				D1334B4C1B92F9EA00CA290B /* XmeetMessageCell.h */,
+				D1334B4D1B92F9EA00CA290B /* XmeetMessageCell.m */,
+				D1334B581B92FE7600CA290B /* XmeetMessage.h */,
+				D1334B591B92FE7600CA290B /* XmeetMessage.m */,
+				D12476721B7E1E4B00DA41F4 /* xmeet_title_user.png */,
+				D12476741B7E1E8900DA41F4 /* xmeet_title_user@2x.png */,
+				D12476751B7E1E8900DA41F4 /* xmeet_title_user@3x.png */,
+				D1632DD01B93263900ED5E77 /* xmeet_message_mine.png */,
+				D1632DD11B93263900ED5E77 /* xmeet_message_mine@2x.png */,
+				D1632DD21B93263900ED5E77 /* xmeet_message_other.png */,
+				D1632DD31B93263900ED5E77 /* xmeet_message_other@2x.png */,
+				D1334B4A1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png */,
+				D12476781B7E2BCC00DA41F4 /* navigationbar.png */,
+				D1632DCB1B93064200ED5E77 /* ic_launcher.png */,
 				E33B64F71B78D1790000AC70 /* Images.xcassets */,
 				E33B64F91B78D1790000AC70 /* LaunchScreen.xib */,
 				E33B64F01B78D1790000AC70 /* Supporting Files */,
@@ -192,7 +249,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E33B64FB1B78D1790000AC70 /* LaunchScreen.xib in Resources */,
+				D12476771B7E1E8900DA41F4 /* xmeet_title_user@3x.png in Resources */,
+				D1632DD61B93263900ED5E77 /* xmeet_message_other.png in Resources */,
+				D1632DD71B93263900ED5E77 /* xmeet_message_other@2x.png in Resources */,
 				E33B64F81B78D1790000AC70 /* Images.xcassets in Resources */,
+				D12476791B7E2BCC00DA41F4 /* navigationbar.png in Resources */,
+				D1632DCC1B93064200ED5E77 /* ic_launcher.png in Resources */,
+				D1632DD41B93263900ED5E77 /* xmeet_message_mine.png in Resources */,
+				D1334B4B1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png in Resources */,
+				D12476761B7E1E8900DA41F4 /* xmeet_title_user@2x.png in Resources */,
+				D12476731B7E1E4B00DA41F4 /* xmeet_title_user.png in Resources */,
+				D1632DD51B93263900ED5E77 /* xmeet_message_mine@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +278,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E33B64F61B78D1790000AC70 /* AppDelegate.m in Sources */,
+				D1334B5A1B92FE7600CA290B /* XmeetMessage.m in Sources */,
 				E33B64F31B78D1790000AC70 /* main.m in Sources */,
+				D1334B4E1B92F9EA00CA290B /* XmeetMessageCell.m in Sources */,
+				D124766F1B7E1BD300DA41F4 /* RootViewController.m in Sources */,
+				D124766C1B7DEE0800DA41F4 /* XmeetViewController.m in Sources */,
+				D1632DCF1B931BDF00ED5E77 /* XmeetTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +466,7 @@
 				E33B650C1B78D1790000AC70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E33B650D1B78D1790000AC70 /* Build configuration list for PBXNativeTarget "xmeet-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -402,6 +475,7 @@
 				E33B650F1B78D1790000AC70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

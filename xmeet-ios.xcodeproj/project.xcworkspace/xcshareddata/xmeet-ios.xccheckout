@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5EB956B0-40C7-42A2-A201-1961CC269E16</string>
+	<key>IDESourceControlProjectName</key>
+	<string>xmeet-ios</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3508C6627D5BA465BDA9F4874FAC5765983E206F</key>
+		<string>https://github.com/houkinglong/xmeet-android.git</string>
+		<key>B3227C8258D511C8A5F8F180C9334AC1171A59CE</key>
+		<string>https://github.com/houkinglong/xmeet-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>xmeet-ios.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3508C6627D5BA465BDA9F4874FAC5765983E206F</key>
+		<string>../../../xmeet-android</string>
+		<key>B3227C8258D511C8A5F8F180C9334AC1171A59CE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/houkinglong/xmeet-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B3227C8258D511C8A5F8F180C9334AC1171A59CE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3508C6627D5BA465BDA9F4874FAC5765983E206F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>xmeet-android</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B3227C8258D511C8A5F8F180C9334AC1171A59CE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>xmeet-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
