@@ -83,7 +83,7 @@
             
             if ([mId isEqualToString:user.uid]) {
                 [[NSUserDefaults standardUserDefaults]setObject:user.nickname forKey:@"user_nickname"];
-                user.isSelf = true;
+                user.isSelf = YES;
             }
             
             [mMembers addMember:user];

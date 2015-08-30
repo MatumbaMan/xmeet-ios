@@ -17,4 +17,5 @@
 - (void)addMember:(XmeetUserInfo *)user;
 - (NSString *)removeMember:(NSString *)uid;
 - (void)renameMember:(NSString *)name uid:(NSString *)uid;
+
 @end

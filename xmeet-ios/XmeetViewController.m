@@ -198,7 +198,8 @@
 
 #pragma sendMessage
 - (void)sendMessage {
-    
+    [mWebSocket send:_mMessageText.text];
+    _mMessageText.text = @"";
 }
 
 #pragma mark alertview deltegate
@@ -206,7 +207,7 @@
 {
     //得到输入框
     UITextField *tf=[alertView textFieldAtIndex:0];
-    NSLog(@"%@", tf.text);
+    [mWebSocket send:[NSString stringWithFormat:@"@changename:%@", tf.text]];
 }
 
 #pragma mark tableview delegate

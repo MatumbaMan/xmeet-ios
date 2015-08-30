@@ -12,6 +12,6 @@
 
 @property (nonatomic, copy) NSString * uid;
 @property (nonatomic, copy) NSString * nickname;
-@property (nonatomic, assign) Boolean isSelf;
+@property (nonatomic, assign) BOOL isSelf;
 
 @end
