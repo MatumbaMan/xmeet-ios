@@ -11,11 +11,13 @@
 #import "XmeetUtils.h"
 #import "XmeetMessage.h"
 #import "XmeetTools.h"
+#import "XmeetHandler.h"
 
 @interface XmeetViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView * mMessageList;
 @property (nonatomic, retain) UIView *      mSendView;
+@property (nonatomic, retain) UITextField * mMessageText;
 
 @property (nonatomic, retain) NSMutableArray * mData;
 @end
@@ -28,6 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      NSLog(@"viewDidLoad");
+    XmeetHandler *hander = [[XmeetHandler alloc]init];
+    [hander connect:@"ws://meet.xpro.im:8080/xgate/websocket/14009e12d791e664fc0175aecb31d833?nickname=WhiteAnimals"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +52,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"viewWillAppear");
+//    NSLog(@"viewWillAppear");
+    [self scrollTableToFoot:YES];
 }
 
 - (void)initNavigation {
@@ -101,12 +106,12 @@
     _mSendView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"xmeet_toolbar_bottom_bar"]];
     [self.view addSubview:_mSendView];
     
-    UITextField * mMessageText = [[UITextField alloc]initWithFrame:CGRectMake(10, 4, VIEW_WEIGHT - 80, 40)];
-    mMessageText.returnKeyType = UIReturnKeySend;
-    mMessageText.placeholder = @"请输入...";
-    mMessageText.borderStyle = UITextBorderStyleRoundedRect;
-    mMessageText.font = [UIFont fontWithName:FONT_NAME size:14];
-    [_mSendView addSubview:mMessageText];
+    _mMessageText = [[UITextField alloc]initWithFrame:CGRectMake(10, 4, VIEW_WEIGHT - 80, 40)];
+    _mMessageText.returnKeyType = UIReturnKeySend;
+    _mMessageText.placeholder = @"请输入...";
+    _mMessageText.borderStyle = UITextBorderStyleRoundedRect;
+    _mMessageText.font = [UIFont fontWithName:FONT_NAME size:14];
+    [_mSendView addSubview:_mMessageText];
     
     UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(VIEW_WEIGHT - 60, 9, 50, 30)];
     button.backgroundColor = [UIColor clearColor];
@@ -116,8 +121,65 @@
     [button setTitle:@"发送" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchUpInside];
     [_mSendView addSubview:button];
+    
+    //键盘遮挡问题
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *keyboardBoundsValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect keyboardBounds;
+    [keyboardBoundsValue getValue:&keyboardBounds];
+    
+    NSInteger offset = keyboardBounds.origin.y - 48 ;
+    
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:animationDuration + 0.4];
+    
+    _mSendView.frame = CGRectMake(0, offset, VIEW_HEIGHT, 48);
+    _mMessageList.frame = CGRectMake(0, 0, VIEW_WEIGHT, offset);
+    
+    [self scrollTableToFoot:YES];
+    
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:animationDuration + 0.4];
+
+    _mSendView.frame = CGRectMake(0, VIEW_HEIGHT, VIEW_WEIGHT, 48);
+    
+    [UIView commitAnimations];
+    
+    _mMessageList.frame = CGRectMake(0, 0, VIEW_WEIGHT, VIEW_HEIGHT);
+}
+
+- (void)scrollTableToFoot:(BOOL)animated
+{
+    NSInteger s = [self.mMessageList numberOfSections];
+    if (s<1) return;
+    NSInteger r = [self.mMessageList numberOfRowsInSection:s-1];
+    if (r<1) return;
+    
+    NSIndexPath *ip = [NSIndexPath indexPathForRow:r-1 inSection:s-1];
+    
+    [self.mMessageList scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+}
 
 #pragma rename
 - (void)rename {
