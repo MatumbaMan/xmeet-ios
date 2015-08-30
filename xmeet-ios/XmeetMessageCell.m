@@ -50,6 +50,9 @@
 }
 
 - (float)initTime:(NSString *)time {
+    if (_msg.type == 2) {
+        time = _msg.message;
+    }
     time = [NSString stringWithFormat:@"  %@  ", time];
     CGSize size = [XmeetTools getStringSize:time font:14 width:VIEW_WEIGHT - 20];
     

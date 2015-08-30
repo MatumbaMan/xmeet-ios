@@ -11,20 +11,19 @@
 
 @protocol XmeetDelegate <NSObject>
 
-- (void)onOpen;
-- (void)onClose;
 - (void)onJoin:(XmeetMessage *) message;
 - (void)onLeave:(XmeetMessage *) message;
 - (void)onMessage:(XmeetMessage *) message;
 - (void)onChangeName:(XmeetMessage *)message;
-- (void)onHistroy:(XmeetMessage *)message;
-- (void)onError:(NSString *)errmsg;
+- (void)onHistroy:(NSMutableArray *)messages;
 
 @end
 
 @interface XmeetHandler : NSObject
 
 @property(nonatomic, assign) id<XmeetDelegate> delegate;
-- (void)connect:(NSString *)url;
+
+- (void)parseMessage:(id)message;
+- (id)init;
 
 @end

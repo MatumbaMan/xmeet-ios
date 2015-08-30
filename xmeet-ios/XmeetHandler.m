@@ -7,48 +7,50 @@
 //
 
 #import "XmeetHandler.h"
-#import "SocketRocket/SRWebSocket.h"
-#import "JSON/JSON.h"
+#import "XmeetUserInfo.h"
+#import "XmeetMembers.h"
 
-@interface XmeetHandler () <SRWebSocketDelegate>
+#import "JSON.h"
+
+@interface XmeetHandler ()
 {
-    SRWebSocket * mWebSocket;
+    NSString * mId;
+    XmeetMembers * mMembers;
 }
 @end
 
 @implementation XmeetHandler
-//@"ws://meet.xpro.im:8080/xgate/websocket/14009e12d791e664fc0175aecb31d833?nickname=WhiteAnimals"
-- (void)connect:(NSString *)url {
-    mWebSocket = [[SRWebSocket alloc]initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-    mWebSocket.delegate = self;
-    [mWebSocket open];
-}
-
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-    NSLog(@"Websocket connected.");
-    [self.delegate onOpen];
-}
-
--(void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
-    NSLog(@"Websocket failed with error %@", error);
-    [self.delegate onError:error.localizedFailureReason];
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSLog(@"Received %@", message);
-    [self parseMessage:message];
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"Websocket closed.");
-    [self.delegate onClose];
+- (id)init {
+    self = [super init];
+    if (self) {
+        mMembers = [[XmeetMembers alloc]init];
+    }
+    return self;
 }
 
 - (void)parseMessage:(id)message {
     @try {
         NSDictionary *object = [message JSONValue];
         NSString * type = [object valueForKey:@"type"];
-        NSLog(@"%@", object);
+//        NSLog(@"%@ %@", object, type);
+        
+        if ([type isEqualToString:@"members"] ) {
+            [self parseMembers:object];
+        } else if ([type isEqualToString:@"member_count"]) {
+            
+        } else if ([type isEqualToString:@"normal"]) {
+            [self parseNormal:object];
+        } else if ([type isEqualToString:@"join"]) {
+            [self parseJoin:object];
+        } else if ([type isEqualToString:@"leave"]) {
+            [self parseLeave:object];
+        } else if ([type isEqualToString:@"self"]) {
+            [self parseSelf:object];
+        } else if ([type isEqualToString:@"changename"]) {
+            [self parseChangeName:object];
+        } else if ([type isEqualToString:@"history"]) {
+            [self parseHisgory:object];
+        }
     }
     @catch (NSException *exception) {
         
@@ -57,5 +59,166 @@
         
     }
 }
+
+- (void) parseSelf:(NSDictionary *)object {
+    @try {
+        
+        mId = [object valueForKey:@"payload"];
+        
+    } @catch (NSException *exception) {
+    }
+}
+
+- (void) parseMembers:(NSDictionary *)object {
+    @try {
+        NSArray *payload = [object valueForKey:@"payload"];
+        
+        for (int i = 0; i < payload.count; i++) {
+            
+            NSDictionary * info = [payload objectAtIndex:i];
+            
+            XmeetUserInfo * user 	=  [[XmeetUserInfo alloc]init];
+            user.uid 			= [info valueForKey:@"pid"];
+            user.nickname 		= [info valueForKey:@"nickname"];
+            
+            if ([mId isEqualToString:user.uid]) {
+                [[NSUserDefaults standardUserDefaults]setObject:user.nickname forKey:@"user_nickname"];
+                user.isSelf = true;
+            }
+            
+            [mMembers addMember:user];
+        }
+        
+    } @catch (NSException *exception) {
+        
+    }
+}
+
+- (void) parseJoin:(NSDictionary *)object {
+    @try {
+        
+        XmeetUserInfo * user 	= [[XmeetUserInfo alloc]init];
+
+        user.uid 			= [object valueForKey:@"from"];
+        user.nickname 		= [object valueForKey:@"payload"];
+        
+        [mMembers addMember:user];
+        
+        XmeetMessage * message = [[XmeetMessage alloc]init];
+        message.message = [NSString stringWithFormat:@"%@ 加入了聊天室", user.nickname];
+        message.type = 2;
+        
+        if ([self.delegate respondsToSelector:@selector(onJoin:)])
+            [self.delegate onJoin:message];
+        
+    } @catch (NSException *exception) {
+        
+    }
+}
+
+- (void) parseLeave:(NSDictionary *)object {
+    @try {
+        NSString *uid = [object valueForKey:@"from"];
+        NSString *nickname = [mMembers removeMember:uid];
+        XmeetMessage * message = [[XmeetMessage alloc]init];
+        message.message = [NSString stringWithFormat:@"%@ 离开了聊天室", nickname];
+        message.type = 2;
+        
+        if ([self.delegate respondsToSelector:@selector(onLeave:)])
+            [self.delegate onLeave:message];
+
+    } @catch (NSException *exception) {
+       
+    }
+}
+
+- (void) parseNormal:(NSDictionary *)object {
+    @try {
+        NSString * uid = [object valueForKey:@"from"];
+        NSString * payload = [object valueForKey:@"payload"];
+        NSString * send_time = [object valueForKey:@"send_time"];
+        
+        XmeetUserInfo * user = [mMembers queryMember:uid];
+        NSString * nickname = user.nickname == nil ? @"" : user.nickname;
+        
+        XmeetMessage * message = [[XmeetMessage alloc]init];
+        message.nickName = nickname;
+        message.message = payload;
+        message.time = send_time;
+        message.type = (user.isSelf ? 1 : 0);
+        
+        if ([self.delegate respondsToSelector:@selector(onMessage:)])
+            [self.delegate onMessage:message];
+        
+    } @catch (NSException *exception) {
+        
+    }
+}
+
+- (void) parseChangeName:(NSDictionary *)object {
+    @try {
+        
+        NSString * uid = [object valueForKey:@"from"];
+        NSString * newname = [object valueForKey:@"payload"];
+        
+        XmeetUserInfo * user = [mMembers queryMember:uid];
+        NSString * nickname = user.nickname == nil ? @"" : user.nickname;
+        
+        NSString * old = nickname;
+        [mMembers renameMember:newname uid:uid];
+        
+        XmeetMessage *message = [[XmeetMessage alloc]init];
+        message.message = [NSString stringWithFormat:@"%@ 使用了新名字 %@", old, newname];
+        message.type = 2;
+        message.nickName = newname;
+        
+        if ([self.delegate respondsToSelector:@selector(onChangeName:)])
+            [self.delegate onChangeName:message];
+        
+    } @catch (NSException *exception) {
+
+    }
+}
+
+- (void) parseHisgory:(NSDictionary *)object {
+    
+    NSMutableArray * list = [[NSMutableArray alloc]init];
+//    List<XmeetMessage> list = new ArrayList<XmeetMessage>();
+    @try {
+//        Thread.sleep(1000);
+        NSArray * payload = [object valueForKey:@"payload"];
+        
+        for (int i = 0; i < payload.count; i ++) {
+            NSDictionary * info = [payload objectAtIndex:i];
+            
+            XmeetMessage * message = [[XmeetMessage alloc]init];
+            
+            XmeetUserInfo * user 	= [mMembers queryMember:[info valueForKey:@"from"]];
+            NSString * nickname = user.nickname == nil ? @"" : user.nickname;
+            message.nickName	= nickname;
+            message.message		= [info valueForKey:@"payload" ];
+            message.time	= [info valueForKey:@"send_time"];
+
+            if ([mId isEqualToString:user.uid])
+                user.isSelf = true;
+            
+            [list addObject:message];
+        }
+        
+        
+    } @catch (NSException *exception) {
+
+    } @finally {
+        XmeetMessage *message = [[XmeetMessage alloc]init];
+        message.message		= @"------------以上是历史消息---------------";
+        message.type		= 2;
+        
+        [list addObject:message];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(onHistroy:)])
+        [self.delegate onHistroy:list];
+}
+
 
 @end

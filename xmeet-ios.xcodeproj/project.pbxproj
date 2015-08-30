@@ -22,7 +22,9 @@
 		D1632DD51B93263900ED5E77 /* xmeet_message_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DD11B93263900ED5E77 /* xmeet_message_mine@2x.png */; };
 		D1632DD61B93263900ED5E77 /* xmeet_message_other.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DD21B93263900ED5E77 /* xmeet_message_other.png */; };
 		D1632DD71B93263900ED5E77 /* xmeet_message_other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DD31B93263900ED5E77 /* xmeet_message_other@2x.png */; };
-		E31F43F21B932A750075C716 /* XmeetHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E31F43F11B932A750075C716 /* XmeetHandler.m */; };
+		D1632DDA1B9334DB00ED5E77 /* XmeetHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D1632DD91B9334DB00ED5E77 /* XmeetHandler.m */; };
+		D1632DDD1B93381100ED5E77 /* XmeetUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D1632DDC1B93381100ED5E77 /* XmeetUserInfo.m */; };
+		D1632DE01B93393000ED5E77 /* XmeetMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = D1632DDF1B93393000ED5E77 /* XmeetMembers.m */; };
 		E31F440D1B932FCD0075C716 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E31F44021B932FCD0075C716 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E31F440E1B932FCD0075C716 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E31F44041B932FCD0075C716 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E31F440F1B932FCD0075C716 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E31F44061B932FCD0075C716 /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -31,9 +33,6 @@
 		E31F44121B932FCD0075C716 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = E31F440C1B932FCD0075C716 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E31F44171B932FDC0075C716 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E31F44161B932FDC0075C716 /* SRWebSocket.m */; };
 		E31F44191B9330B80075C716 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E31F44181B9330B80075C716 /* libicucore.dylib */; };
-		E31F441B1B9330C00075C716 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E31F441A1B9330C00075C716 /* CFNetwork.framework */; };
-		E31F441D1B9330C80075C716 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E31F441C1B9330C80075C716 /* Security.framework */; };
-		E31F441F1B9330D50075C716 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E31F441E1B9330D40075C716 /* Foundation.framework */; };
 		E33B64F31B78D1790000AC70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E33B64F21B78D1790000AC70 /* main.m */; };
 		E33B64F61B78D1790000AC70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E33B64F51B78D1790000AC70 /* AppDelegate.m */; };
 		E33B64F81B78D1790000AC70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E33B64F71B78D1790000AC70 /* Images.xcassets */; };
@@ -72,8 +71,12 @@
 		D1632DD11B93263900ED5E77 /* xmeet_message_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmeet_message_mine@2x.png"; sourceTree = "<group>"; };
 		D1632DD21B93263900ED5E77 /* xmeet_message_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmeet_message_other.png; sourceTree = "<group>"; };
 		D1632DD31B93263900ED5E77 /* xmeet_message_other@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmeet_message_other@2x.png"; sourceTree = "<group>"; };
-		E31F43F01B932A750075C716 /* XmeetHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetHandler.h; sourceTree = "<group>"; };
-		E31F43F11B932A750075C716 /* XmeetHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetHandler.m; sourceTree = "<group>"; };
+		D1632DD81B9334DB00ED5E77 /* XmeetHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetHandler.h; sourceTree = "<group>"; };
+		D1632DD91B9334DB00ED5E77 /* XmeetHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetHandler.m; sourceTree = "<group>"; };
+		D1632DDB1B93381100ED5E77 /* XmeetUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetUserInfo.h; sourceTree = "<group>"; };
+		D1632DDC1B93381100ED5E77 /* XmeetUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetUserInfo.m; sourceTree = "<group>"; };
+		D1632DDE1B93393000ED5E77 /* XmeetMembers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetMembers.h; sourceTree = "<group>"; };
+		D1632DDF1B93393000ED5E77 /* XmeetMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetMembers.m; sourceTree = "<group>"; };
 		E31F44001B932FCD0075C716 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		E31F44011B932FCD0075C716 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		E31F44021B932FCD0075C716 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -91,9 +94,6 @@
 		E31F44151B932FDC0075C716 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		E31F44161B932FDC0075C716 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		E31F44181B9330B80075C716 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		E31F441A1B9330C00075C716 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		E31F441C1B9330C80075C716 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		E31F441E1B9330D40075C716 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E33B64ED1B78D1790000AC70 /* xmeet-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xmeet-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E33B64F11B78D1790000AC70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E33B64F21B78D1790000AC70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -111,9 +111,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E31F441F1B9330D50075C716 /* Foundation.framework in Frameworks */,
-				E31F441D1B9330C80075C716 /* Security.framework in Frameworks */,
-				E31F441B1B9330C00075C716 /* CFNetwork.framework in Frameworks */,
 				E31F44191B9330B80075C716 /* libicucore.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,9 +158,6 @@
 		E33B64E41B78D1790000AC70 = {
 			isa = PBXGroup;
 			children = (
-				E31F441E1B9330D40075C716 /* Foundation.framework */,
-				E31F441C1B9330C80075C716 /* Security.framework */,
-				E31F441A1B9330C00075C716 /* CFNetwork.framework */,
 				E31F44181B9330B80075C716 /* libicucore.dylib */,
 				E33B64EF1B78D1790000AC70 /* xmeet-ios */,
 				E33B65031B78D1790000AC70 /* xmeet-iosTests */,
@@ -194,10 +188,14 @@
 				D124766B1B7DEE0800DA41F4 /* XmeetViewController.m */,
 				D1334B4C1B92F9EA00CA290B /* XmeetMessageCell.h */,
 				D1334B4D1B92F9EA00CA290B /* XmeetMessageCell.m */,
-				E31F43F01B932A750075C716 /* XmeetHandler.h */,
-				E31F43F11B932A750075C716 /* XmeetHandler.m */,
 				D1334B581B92FE7600CA290B /* XmeetMessage.h */,
 				D1334B591B92FE7600CA290B /* XmeetMessage.m */,
+				D1632DDB1B93381100ED5E77 /* XmeetUserInfo.h */,
+				D1632DDC1B93381100ED5E77 /* XmeetUserInfo.m */,
+				D1632DDE1B93393000ED5E77 /* XmeetMembers.h */,
+				D1632DDF1B93393000ED5E77 /* XmeetMembers.m */,
+				D1632DD81B9334DB00ED5E77 /* XmeetHandler.h */,
+				D1632DD91B9334DB00ED5E77 /* XmeetHandler.m */,
 				E31F44131B932FDC0075C716 /* SocketRocket */,
 				E31F43FF1B932FCD0075C716 /* JSON */,
 				D12476721B7E1E4B00DA41F4 /* xmeet_title_user.png */,
@@ -351,14 +349,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1632DDA1B9334DB00ED5E77 /* XmeetHandler.m in Sources */,
 				E31F440E1B932FCD0075C716 /* NSString+SBJSON.m in Sources */,
 				E31F44101B932FCD0075C716 /* SBJsonBase.m in Sources */,
 				E33B64F61B78D1790000AC70 /* AppDelegate.m in Sources */,
 				D1334B5A1B92FE7600CA290B /* XmeetMessage.m in Sources */,
 				E31F44111B932FCD0075C716 /* SBJsonParser.m in Sources */,
-				E31F43F21B932A750075C716 /* XmeetHandler.m in Sources */,
 				E33B64F31B78D1790000AC70 /* main.m in Sources */,
 				E31F44121B932FCD0075C716 /* SBJsonWriter.m in Sources */,
+				D1632DDD1B93381100ED5E77 /* XmeetUserInfo.m in Sources */,
+				D1632DE01B93393000ED5E77 /* XmeetMembers.m in Sources */,
 				E31F440D1B932FCD0075C716 /* NSObject+SBJSON.m in Sources */,
 				D1334B4E1B92F9EA00CA290B /* XmeetMessageCell.m in Sources */,
 				D124766F1B7E1BD300DA41F4 /* RootViewController.m in Sources */,

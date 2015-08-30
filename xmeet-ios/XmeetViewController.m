@@ -11,10 +11,15 @@
 #import "XmeetUtils.h"
 #import "XmeetMessage.h"
 #import "XmeetTools.h"
+#import "SRWebSocket.h"
+
 #import "XmeetHandler.h"
 
-@interface XmeetViewController ()<UITableViewDataSource, UITableViewDelegate>
-
+@interface XmeetViewController ()<UITableViewDataSource, UITableViewDelegate, SRWebSocketDelegate, XmeetDelegate>
+{
+    SRWebSocket * mWebSocket;
+    XmeetHandler * mHandler;
+}
 @property (nonatomic, retain) UITableView * mMessageList;
 @property (nonatomic, retain) UIView *      mSendView;
 @property (nonatomic, retain) UITextField * mMessageText;
@@ -30,8 +35,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      NSLog(@"viewDidLoad");
-    XmeetHandler *hander = [[XmeetHandler alloc]init];
-    [hander connect:@"ws://meet.xpro.im:8080/xgate/websocket/14009e12d791e664fc0175aecb31d833?nickname=WhiteAnimals"];
+    mHandler = [[XmeetHandler alloc]init];
+    mHandler.delegate = self;
+    mWebSocket = [[SRWebSocket alloc]initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://meet.xpro.im:8080/xgate/websocket/14009e12d791e664fc0175aecb31d833?nickname=WhiteAnimals"]]];
+    mWebSocket.delegate = self;
+    [mWebSocket open];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,15 +98,15 @@
     [self.view addSubview:_mMessageList];
     
     _mData = [[NSMutableArray alloc]init];
-    for (int i = 0; i<12; i++)
-    {
-        XmeetMessage * message = [[XmeetMessage alloc]init];
-        message.message = [NSString stringWithFormat:@"需要重载此方法，%d", i];
-        message.time = @"2015-08-08 00:00:00";
-        message.nickName = @"ronaldo1sdfasdfas";
-        message.type = random()%3;
-        [_mData addObject:message];
-    }
+//    for (int i = 0; i<12; i++)
+//    {
+//        XmeetMessage * message = [[XmeetMessage alloc]init];
+//        message.message = [NSString stringWithFormat:@"需要重载此方法，%d", i];
+//        message.time = @"2015-08-08 00:00:00";
+//        message.nickName = @"ronaldo1sdfasdfas";
+//        message.type = random()%3;
+//        [_mData addObject:message];
+//    }
 }
 
 - (void)initSendeView {
@@ -241,6 +249,66 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket {
+    NSLog(@"Websocket connected.");
+
+}
+
+-(void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
+    NSLog(@"Websocket failed with error %@", error);
+
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+//    NSLog(@"Received %@", message);
+    [mHandler parseMessage:message];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
+    NSLog(@"Websocket closed.");
+
+}
+
+#pragma mark handler delegate
+- (void)onJoin:(XmeetMessage *) message {
+    [self insertData:message];
+    NSLog(@"onJoin%@", message.message);
+}
+
+- (void)onLeave:(XmeetMessage *) message {
+    [self insertData:message];
+    NSLog(@"onLeave%@", message.message);
+}
+
+- (void)onMessage:(XmeetMessage *) message {
+    [self insertData:message];
+    NSLog(@"onMessage%@", message.message);
+}
+
+- (void)onChangeName:(XmeetMessage *)message {
+    [self insertData:message];
+    NSLog(@"onChangeName%@", message.message);
+}
+
+- (void)onHistroy:(NSMutableArray *)messages {
+    for (XmeetMessage * message in messages) {
+        [self insertData:message];
+        NSLog(@"onHistroy%@", message.message);
+    }
+}
+
+- (void)insertData:(XmeetMessage *) message {
+    [_mData addObject:message];
+    
+    [_mMessageList beginUpdates];
+    NSIndexPath * index = [NSIndexPath indexPathForRow:_mData.count - 1 inSection:0];
+    [_mMessageList insertRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationRight];
+    [_mMessageList endUpdates];
+    
+    _mMessageText.text = @"";
+    [self scrollTableToFoot:YES];
 }
 
 @end
