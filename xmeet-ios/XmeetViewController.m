@@ -16,15 +16,17 @@
 #import "XmeetHandler.h"
 
 @interface XmeetViewController ()<UITableViewDataSource, UITableViewDelegate, SRWebSocketDelegate, XmeetDelegate>
-{
-    SRWebSocket * mWebSocket;
-    XmeetHandler * mHandler;
-}
+
 @property (nonatomic, retain) UITableView * mMessageList;
 @property (nonatomic, retain) UIView *      mSendView;
 @property (nonatomic, retain) UITextField * mMessageText;
 
 @property (nonatomic, retain) NSMutableArray * mData;
+@property (nonatomic, retain) XmeetHandler * mHandler;
+@property (nonatomic, retain) SRWebSocket * mWebSocket;
+
+@property (nonatomic, copy) NSString * mNickname;
+@property (nonatomic, copy) NSString * mNestid;
 @end
 
 
@@ -35,11 +37,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      NSLog(@"viewDidLoad");
-    mHandler = [[XmeetHandler alloc]init];
-    mHandler.delegate = self;
-    mWebSocket = [[SRWebSocket alloc]initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://meet.xpro.im:8080/xgate/websocket/14009e12d791e664fc0175aecb31d833?nickname=WhiteAnimals"]]];
-    mWebSocket.delegate = self;
-    [mWebSocket open];
+    _mHandler = [[XmeetHandler alloc]init];
+    _mHandler.delegate = self;
+    _mWebSocket = [[SRWebSocket alloc]initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self buildUrl]]]];
+    _mWebSocket.delegate = self;
+    [_mWebSocket open];
+}
+
+- (NSString *)buildUrl {
+    _mNickname = [[NSUserDefaults standardUserDefaults]valueForKey:@"user_nickname"];
+    if (_mNickname == nil)
+        _mNickname = @"";
+    _mNestid = @"14009e12d791e664fc0175aecb31d833";
+    return [NSString stringWithFormat:@"ws://meet.xpro.im:8080/xgate/websocket/%@?nickname=%@", _mNestid, _mNickname];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -191,6 +202,7 @@
 
 #pragma rename
 - (void)rename {
+    [self.view endEditing:YES];
     UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"昵称修改" message:@"请输入新的名字" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
@@ -198,7 +210,7 @@
 
 #pragma sendMessage
 - (void)sendMessage {
-    [mWebSocket send:_mMessageText.text];
+    [_mWebSocket send:_mMessageText.text];
     _mMessageText.text = @"";
 }
 
@@ -211,9 +223,12 @@
 #pragma mark alertview deltegate
 - (void)alertView : (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //得到输入框
-    UITextField *tf=[alertView textFieldAtIndex:0];
-    [mWebSocket send:[NSString stringWithFormat:@"@changename:%@", tf.text]];
+    if (buttonIndex == 1) {
+        //得到输入框
+        UITextField *tf=[alertView textFieldAtIndex:0];
+        if (tf && ![tf.text isEqualToString:@""])
+            [_mWebSocket send:[NSString stringWithFormat:@"@changename:%@", tf.text]];
+    }
 }
 
 #pragma mark tableview delegate
@@ -275,8 +290,7 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-//    NSLog(@"Received %@", message);
-    [mHandler parseMessage:message];
+    [_mHandler parseMessage:message];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
@@ -287,28 +301,23 @@
 #pragma mark handler delegate
 - (void)onJoin:(XmeetMessage *) message {
     [self insertData:message];
-    NSLog(@"onJoin%@", message.message);
 }
 
 - (void)onLeave:(XmeetMessage *) message {
     [self insertData:message];
-    NSLog(@"onLeave%@", message.message);
 }
 
 - (void)onMessage:(XmeetMessage *) message {
     [self insertData:message];
-    NSLog(@"onMessage%@", message.message);
 }
 
 - (void)onChangeName:(XmeetMessage *)message {
     [self insertData:message];
-    NSLog(@"onChangeName%@", message.message);
 }
 
 - (void)onHistroy:(NSMutableArray *)messages {
     for (XmeetMessage * message in messages) {
         [self insertData:message];
-        NSLog(@"onHistroy%@", message.message);
     }
 }
 
