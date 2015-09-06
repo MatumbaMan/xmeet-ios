@@ -15,5 +15,6 @@
 + (CGSize)getMessageSize:(XmeetMessage *)message font:(CGFloat)font;
 + (CGSize)getMessageSize:(XmeetMessage *)message font:(CGFloat)font flag:(Boolean)flag;
 + (CGSize)getStringSize:(NSString *)string font:(CGFloat)font width:(CGFloat)width;
++ (NSString *)md5:(NSString *)str;
 
 @end

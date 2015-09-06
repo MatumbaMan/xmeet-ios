@@ -10,4 +10,6 @@
 
 @interface XmeetViewController : UIViewController
 
+- (void)setShowType:(BOOL)flag;
+
 @end

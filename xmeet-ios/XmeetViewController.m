@@ -27,6 +27,8 @@
 
 @property (nonatomic, copy) NSString * mNickname;
 @property (nonatomic, copy) NSString * mNestid;
+
+@property (nonatomic, assign) BOOL isPush;
 @end
 
 
@@ -48,6 +50,7 @@
     _mNickname = [[NSUserDefaults standardUserDefaults]valueForKey:@"user_nickname"];
     if (_mNickname == nil)
         _mNickname = @"";
+<<<<<<< Updated upstream
     _mNestid = @"14009e12d791e664fc0175aecb31d833";
     NSString * urlString = [NSString stringWithFormat:@"ws://meet.xpro.im:8080/xgate/websocket/%@?nickname=%@", _mNestid, _mNickname];
     return (NSString *)
@@ -56,6 +59,13 @@
                                             (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
                                             NULL,
                                             kCFStringEncodingUTF8));
+=======
+    NSString * bd = [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString *)kCFBundleIdentifierKey];
+    _mNestid = [XmeetTools md5:bd];
+    if (_mNestid == nil)
+        _mNestid = [XmeetTools md5:@"com.xmeet.iosclient"];
+    return [NSString stringWithFormat:@"ws://meet.xpro.im:8080/xgate/websocket/%@?nickname=%@", _mNestid, _mNickname];
+>>>>>>> Stashed changes
     
 }
 
@@ -97,12 +107,26 @@
     self.navigationItem.rightBarButtonItem = right;
     
     //设置title颜色
-    NSDictionary * dict = [NSDictionary dictionaryWithObject:[UIColor redColor] forKey:NSForegroundColorAttributeName];
+    NSDictionary * dict = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     self.navigationController.navigationBar.titleTextAttributes = dict;
     self.navigationItem.title = @"我的聊天室";
     
-//    UIImage * im = [UIImage imageNamed:@"navigationbar"];
-//    [self.navigationController.navigationBar setBackgroundImage:im forBarMetrics:UIBarMetricsDefault];
+    UIImage * im = [UIImage imageNamed:@"xmeet_navigation_bar"];
+    [self.navigationController.navigationBar setBackgroundImage:im forBarMetrics:UIBarMetricsDefault];
+    
+    UIButton * backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 52, 30)];
+    [backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -20)];
+    UIImageView * backImage = [[UIImageView alloc]initWithFrame:CGRectMake(3, 8, 7, 14)];
+    backImage.image = [UIImage imageNamed:@"xmeet_back_arrow"];
+    [backButton addSubview:backImage];
+    [backButton setTitle:@"返回" forState:UIControlStateNormal];
+    [backButton setBackgroundColor:[UIColor clearColor]];
+    
+    [backButton addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *back = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+    self.navigationItem.leftBarButtonItem = back;
+    
+//    [self.navigationController.navigationBar setBackgroundColor:kGeneralColor(57,67,70)];
 }
 
 - (void)initListView {
@@ -124,11 +148,24 @@
 //        message.type = random()%3;
 //        [_mData addObject:message];
 //    }
+    
+    
+}
+
+- (void)setShowType:(BOOL)flag {
+    _isPush = flag;
+}
+
+- (void)backClick {
+    if (_isPush)
+        [self.navigationController popViewControllerAnimated:YES];
+    else
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)initSendeView {
     _mSendView = [[UIView alloc]initWithFrame:CGRectMake(0, VIEW_HEIGHT, VIEW_WEIGHT, 48)];
-    _mSendView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"xmeet_toolbar_bottom_bar"]];
+    _mSendView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"xmeet_navigation_bar"]];
     [self.view addSubview:_mSendView];
     
     _mMessageText = [[UITextField alloc]initWithFrame:CGRectMake(10, 4, VIEW_WEIGHT - 80, 40)];

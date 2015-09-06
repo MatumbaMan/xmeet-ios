@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,6 +26,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    NSString * bd = [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString *)kCFBundleIdentifierKey];
+    NSLog(@"%@", bd);
     XmeetViewController *xmeet = [[XmeetViewController alloc]init];
     [self.navigationController pushViewController:xmeet animated:YES];
 }

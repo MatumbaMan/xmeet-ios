@@ -16,6 +16,8 @@
 		D1334B4B1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = D1334B4A1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png */; };
 		D1334B4E1B92F9EA00CA290B /* XmeetMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1334B4D1B92F9EA00CA290B /* XmeetMessageCell.m */; };
 		D1334B5A1B92FE7600CA290B /* XmeetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D1334B591B92FE7600CA290B /* XmeetMessage.m */; };
+		D153032E1B9B18B70083488C /* xmeet_back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D153032D1B9B18B70083488C /* xmeet_back_arrow.png */; };
+		D15303301B9B1B0B0083488C /* xmeet_navigation_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = D153032F1B9B1B0B0083488C /* xmeet_navigation_bar.png */; };
 		D1632DCC1B93064200ED5E77 /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DCB1B93064200ED5E77 /* ic_launcher.png */; };
 		D1632DCF1B931BDF00ED5E77 /* XmeetTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D1632DCE1B931BDF00ED5E77 /* XmeetTools.m */; };
 		D1632DD41B93263900ED5E77 /* xmeet_message_mine.png in Resources */ = {isa = PBXBuildFile; fileRef = D1632DD01B93263900ED5E77 /* xmeet_message_mine.png */; };
@@ -64,6 +66,8 @@
 		D1334B571B92FC6400CA290B /* XmeetUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XmeetUtils.h; sourceTree = "<group>"; };
 		D1334B581B92FE7600CA290B /* XmeetMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetMessage.h; sourceTree = "<group>"; };
 		D1334B591B92FE7600CA290B /* XmeetMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetMessage.m; sourceTree = "<group>"; };
+		D153032D1B9B18B70083488C /* xmeet_back_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmeet_back_arrow.png; sourceTree = "<group>"; };
+		D153032F1B9B1B0B0083488C /* xmeet_navigation_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmeet_navigation_bar.png; sourceTree = "<group>"; };
 		D1632DCB1B93064200ED5E77 /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		D1632DCD1B931BDF00ED5E77 /* XmeetTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmeetTools.h; sourceTree = "<group>"; };
 		D1632DCE1B931BDF00ED5E77 /* XmeetTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmeetTools.m; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 				D1632DD21B93263900ED5E77 /* xmeet_message_other.png */,
 				D1632DD31B93263900ED5E77 /* xmeet_message_other@2x.png */,
 				D1334B4A1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png */,
+				D153032D1B9B18B70083488C /* xmeet_back_arrow.png */,
+				D153032F1B9B1B0B0083488C /* xmeet_navigation_bar.png */,
 				D12476781B7E2BCC00DA41F4 /* navigationbar.png */,
 				D1632DCB1B93064200ED5E77 /* ic_launcher.png */,
 				E33B64F71B78D1790000AC70 /* Images.xcassets */,
@@ -325,10 +331,12 @@
 				D1632DD61B93263900ED5E77 /* xmeet_message_other.png in Resources */,
 				D1632DD71B93263900ED5E77 /* xmeet_message_other@2x.png in Resources */,
 				E33B64F81B78D1790000AC70 /* Images.xcassets in Resources */,
+				D153032E1B9B18B70083488C /* xmeet_back_arrow.png in Resources */,
 				D12476791B7E2BCC00DA41F4 /* navigationbar.png in Resources */,
 				D1632DCC1B93064200ED5E77 /* ic_launcher.png in Resources */,
 				D1632DD41B93263900ED5E77 /* xmeet_message_mine.png in Resources */,
 				D1334B4B1B92F85800CA290B /* xmeet_toolbar_bottom_bar.png in Resources */,
+				D15303301B9B1B0B0083488C /* xmeet_navigation_bar.png in Resources */,
 				D12476761B7E1E8900DA41F4 /* xmeet_title_user@2x.png in Resources */,
 				D12476731B7E1E4B00DA41F4 /* xmeet_title_user.png in Resources */,
 				D1632DD51B93263900ED5E77 /* xmeet_message_mine@2x.png in Resources */,
